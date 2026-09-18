@@ -1,0 +1,35 @@
+name: Safety360 Proxy CI
+
+on:
+  push:
+    branches:
+      - main
+      - safety360-proxy-hardening
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Syntax check
+        run: npm run check
+
+      - name: Dependency vulnerability audit
+        run: npm run audit
