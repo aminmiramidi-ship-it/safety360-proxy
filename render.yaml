@@ -6,3 +6,17 @@ services:
     buildCommand: "npm install"
     startCommand: "npm start"
     autoDeploy: true
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BACKEND_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: PROXY_TIMEOUT_MS
+        value: "15000"
+      - key: RATE_LIMIT_MAX
+        value: "300"
+      - key: JSON_BODY_LIMIT
+        value: "2mb"
